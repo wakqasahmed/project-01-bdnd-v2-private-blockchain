@@ -1,6 +1,5 @@
 /**
  *          BlockchainController
- *       (Do not change this code)
  * 
  * This class expose the endpoints that the client applications will use to interact with the 
  * Blockchain dataset
@@ -21,7 +20,7 @@ class BlockchainController {
 
     // Enpoint to Get a Block by Height (GET Endpoint)
     getBlockByHeight() {
-        this.app.get("/block/:height", async (req, res) => {
+        this.app.get("/block/height/:height", async (req, res) => {
             if(req.params.height) {
                 const height = parseInt(req.params.height);
                 let block = await this.blockchain.getBlockByHeight(height);
@@ -80,7 +79,7 @@ class BlockchainController {
 
     // This endpoint allows you to retrieve the block by hash (GET endpoint)
     getBlockByHash() {
-        this.app.get("/block/:hash", async (req, res) => {
+        this.app.get("/block/hash/:hash", async (req, res) => {
             if(req.params.hash) {
                 const hash = req.params.hash;
                 let block = await this.blockchain.getBlockByHash(hash);
