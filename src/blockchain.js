@@ -81,16 +81,15 @@ class Blockchain {
           block.previousBlockHash = currentBlock.hash;
         }
 
-        // Block hash with SHA256 using newBlock and converting to a string
+        // Block hash with SHA256 using new block and converting to a string
         block.hash = SHA256(JSON.stringify(block)).toString();
 
-        self.height++; // Update global block height
-
-        self.chain.push(block);
-
         let isChainValid = await self.validateChain();
-
+        console.log('isChainValid: ', isChainValid);
         if (!isChainValid.length) {
+          self.chain.push(block);
+          self.height++; // Update global block height
+
           resolve(block);
         } else {
           reject('Chain is invalid.');

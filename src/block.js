@@ -41,8 +41,13 @@ class Block {
       // Save in auxiliary variable the current block hash
       let currentBlockHash = self.hash;
 
+      // remove block hash to test block integrity
+      self.hash = null;
+
       // Recalculate the hash of the Block
-      let calculatedBlockHash = SHA256(self).toString();
+      let calculatedBlockHash = SHA256(JSON.stringify(self)).toString();
+
+      self.hash = currentBlockHash;
 
       // Comparing if the hashes changed
       if (currentBlockHash !== calculatedBlockHash) {
