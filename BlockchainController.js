@@ -16,11 +16,18 @@ class BlockchainController {
     this.getBlockByHash();
     this.getStarsByOwner();
     this.healthCheck();
+    this.validateChain();
   }
 
   healthCheck() {
     this.app.get('/', async (req, res) => {
       return res.status(200).send('All is set blockie!');
+    });
+  }
+
+  validateChain() {
+    this.app.get('/chain/validate', async (req, res) => {
+      return res.status(200).send(this.blockchain.validateChain());
     });
   }
 
